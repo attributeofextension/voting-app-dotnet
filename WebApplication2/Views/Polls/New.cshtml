@@ -1,0 +1,29 @@
+﻿@model WebApplication2.Models.Poll
+
+@{
+    ViewBag.Title = "New";
+}
+
+<div class="container">
+    <h2>New Poll</h2>
+    @using (Html.BeginForm("Polls"))
+    {
+        <div class="form-group">
+            @Html.LabelFor(m => m.Name)
+            @Html.TextBoxFor(m => m.Name, new {@class="form-control"})
+        </div>
+        <div class="form-group" id="newpollOptionPanel">
+            @Html.LabelFor(m => m.Options)
+
+            @{
+                for (int i = 0; i < Model.Options.Count; i++)
+                {
+                    @Html.TextBoxFor(m => Model.Options[i].Name, new { @class = "form-control" })
+                }
+            }
+        </div>
+        <button type="submit" class="btn btn-success new-poll-btn" formaction="Save">Submit</button>
+        <button type="submit" class="btn btn-light btn-outline-secondary new-poll-btn" formaction="AddOption">Another Option</button>
+    }
+</div>
+

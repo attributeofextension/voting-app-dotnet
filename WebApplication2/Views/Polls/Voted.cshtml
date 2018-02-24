@@ -1,0 +1,19 @@
+﻿@model WebApplication2.ViewModels.VotedViewModel
+
+@{
+    ViewBag.Title = "Voted";
+}
+
+<h2>You have voted for @Model.VotedFor</h2>
+
+<h4>@Model.Poll.Name</h4>
+<div id="voteChart" style="max-width: 300px;"></div>
+@Html.HiddenFor(m => m.Poll.Id)
+
+@Html.ActionLink("Return To Voting", "Show", "Polls", new { id = Model.Poll.Id }, null)
+
+@section scripts
+{
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="/Scripts/ShowChart.js"></script>
+}

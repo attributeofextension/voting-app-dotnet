@@ -1,0 +1,18 @@
+﻿@model IEnumerable<WebApplication2.Models.Poll>  
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>All Polls</h2>
+
+@if (Model.Count() < 1)
+{
+    <h4>There are no polls!</h4>
+}
+else
+{
+    foreach (var poll in Model)
+    {
+        @Html.ActionLink(poll.Name,"Show","Polls",new { id = poll.Id },null);
+    }
+}

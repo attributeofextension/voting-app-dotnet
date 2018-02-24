@@ -1,0 +1,41 @@
+﻿@model WebApplication2.ViewModels.ShowPollViewModel
+
+@{
+    ViewBag.Title = "Show";
+}
+
+<div>
+    <h4>@Model.Poll.Name</h4>
+    <div id="voteChart" style="max-width: 300px;"></div>
+    @using (Html.BeginForm("Polls"))
+    {
+
+        <div class="btn-group-vertical btn-group-toggle voteBtnPanel" data-toggle="buttons" style="margin-bottom: 10px;">
+            @{
+                for (int i = 0; i < Model.VoteOptions.Count; i++)
+                {
+                    <label class="btn btn-primary" style="width: 300px;">
+                        @Html.RadioButtonFor(m => m.VoteId, Model.VoteOptions[i].Id) @Model.VoteOptions[i].Name
+                    </label>
+                }
+            }
+        </div>
+
+        <div class="input-group" style="max-width: 300px; margin-bottom: 20px; ">
+            @Html.TextBoxFor(m => m.NewOption.Name, new { @class = "form-control", style = "max-width: 100%;" })
+            <span class="input-group-btn">
+                <button class="btn btn-secondary" type="submit" name="addoption" id="addBtn" formaction="/Polls/PutOption">+</button>
+            </span>
+        </div>
+
+        @Html.HiddenFor(m => m.Poll.Id);
+        <button type="submit" class="btn btn-success voteSubmitBtn" name="vote" id="voteSubmit" formaction="/Polls/Voted">Vote</button>
+
+    }
+</div>
+
+@section scripts
+{
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="/Scripts/ShowChart.js"></script>
+}
